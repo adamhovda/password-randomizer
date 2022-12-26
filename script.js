@@ -1,41 +1,71 @@
 // Assignment code here
 
-let lowerAlpa = "abcdefghijklmnopqrstuvwxyz";
-let upperAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let numbers = "0123456789";
-let specialCharacters = "!@#$%^&*()_-=+?/";
 
+const charOptions = {
+  lowerAlpa: "abcdefghijklmnopqrstuvwxyz",
+  upperAlpha: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  numbers: "0123456789",
+  specialCharacters: "!@#$%^&*()_-=+?/"
 
-const lowerCaseArr = lowerAlpa.split("");
-const upperAlphaArr = upperAlpha.split("");
-const numbersArr = numbers.split("");
-const specialCharArr = specialCharacters.split("");
+};
+
 
 
 
 // Get references to the #generate element
 let generateBtn = document.querySelector("#generate");
 
-function passwordCriteria(){
-  let passLength = prompt("Input the length of the password(between 8-128");
-    if (passLength >= 8 && passLength <= 128){
-  let lowerCase = confirm("Include lowercase letters?");
-  let upperCase = confirm("Include uppercase letters?");
-  let numeric = confirm("Include numbers?");
-  let specialChar = confirm("include special characters?");
-    } else {
-      alert("password must be between 8 and 128 characters");
-      passwordCriteria();
-    }
-}
+
+
+function generatePassword(){
+  let requiredPassChar = "";
+  
+  let passLength = prompt("Choose a password length between 8 and 128");
+  
+        let lowerAlpa = confirm("Include lower case characters?");
+        if (lowerAlpa){
+          requiredPassChar += charOptions.lowerAlpa;
+        };
+        
+        let upperAlpha = confirm("Include upper case characters?");
+        if (upperAlpha){
+          requiredPassChar += charOptions.upperAlpha;
+        };
+        
+        let numbers = confirm("Include numbers?");
+        if (numbers) {
+          requiredPassChar += charOptions.numbers;
+        };
+        
+        let specialCharacters = confirm("Include special characters");
+        if (specialCharacters) {
+          requiredPassChar += charOptions.specialCharacters;
+        };
+        
+        console.log(requiredPassChar);
+        
+        let password = "";
+        for (let i = 0; i < passLength; i++){
+          password += requiredPassChar[Math.floor(Math.random() * requiredPassChar.length)]
+        }
+        return password;
+
+        console.log(password);
+
+
+};
 
 // Write password to the #password input
-function writePassword() {
-  passwordCriteria();
 
-  console.log(passLength, lowerCase, upperCase, numeric, specialChar);
+
+
+function writePassword() {
+
+
+  // console.log(passLength, lowerCase, upperCase, numeric, specialChar);
   
   let password = generatePassword();
+
   let passwordText = document.querySelector("#password");
   
   
